@@ -1,0 +1,27 @@
+{
+  "name": "nft-rarity-analyzer",
+  "version": "0.1.0",
+  "description": "A tool for analyzing NFT rarity and ranking collections",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
+  },
+  "keywords": [
+    "nft",
+    "rarity",
+    "blockchain",
+    "ethereum",
+    "analyzer"
+  ],
+  "author": "HenryAndersonZ",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "axios": "^1.4.0",
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
+}
