@@ -1,0 +1,44 @@
+{
+  "nfts": [
+    {
+      "id": 1,
+      "name": "Cool Cat #001",
+      "attributes": {
+        "background": "blue",
+        "fur": "orange",
+        "eyes": "green",
+        "accessories": "sunglasses"
+      }
+    },
+    {
+      "id": 2,
+      "name": "Cool Cat #002",
+      "attributes": {
+        "background": "red",
+        "fur": "black",
+        "eyes": "blue",
+        "accessories": "hat"
+      }
+    },
+    {
+      "id": 3,
+      "name": "Cool Cat #003",
+      "attributes": {
+        "background": "blue",
+        "fur": "white",
+        "eyes": "green",
+        "accessories": "none"
+      }
+    },
+    {
+      "id": 4,
+      "name": "Cool Cat #004",
+      "attributes": {
+        "background": "purple",
+        "fur": "orange",
+        "eyes": "yellow",
+        "accessories": "chain"
+      }
+    }
+  ]
+}
