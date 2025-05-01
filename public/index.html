@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NFT Rarity Analyzer</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        .container { max-width: 800px; margin: 0 auto; }
+        textarea { width: 100%; height: 200px; margin: 10px 0; }
+        button { padding: 10px 20px; background: #007bff; color: white; border: none; cursor: pointer; }
+        .results { margin-top: 20px; }
+        .nft-item { border: 1px solid #ddd; padding: 15px; margin: 10px 0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>NFT Rarity Analyzer</h1>
+        
+        <div>
+            <h3>Paste NFT Data (JSON format):</h3>
+            <textarea id="nftData" placeholder='{"nfts": [{"id": 1, "name": "NFT #1", "attributes": {"trait1": "value1", "trait2": "value2"}}]}'></textarea>
+            <br>
+            <button onclick="analyzeNFTs()">Analyze Rarity</button>
+        </div>
+
+        <div id="results" class="results"></div>
+    </div>
+
+    <script>
+        async function analyzeNFTs() {
+            const data = document.getElementById('nftData').value;
+            const resultsDiv = document.getElementById('results');
+            
+            try {
+                const nftData = JSON.parse(data);
+                
+                const response = await fetch('/analyze', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(nftData)
+                });
+
+                const result = await response.json();
+                
+                if (response.ok) {
+                    displayResults(result);
+                } else {
+                    resultsDiv.innerHTML = `<div style="color: red;">Error: ${result.error}</div>`;
+                }
+            } catch (error) {
+                resultsDiv.innerHTML = `<div style="color: red;">Invalid JSON format</div>`;
+            }
+        }
+
+        function displayResults(result) {
+            const resultsDiv = document.getElementById('results');
+            
+            let html = `<h3>Analysis Results</h3>`;
+            html += `<p><strong>Collection:</strong> ${result.collection}</p>`;
+            html += `<p><strong>Total NFTs:</strong> ${result.size}</p>`;
+            
+            result.nfts.forEach(nft => {
+                html += `
+                    <div class="nft-item">
+                        <h4>Rank #${nft.rank} - ${nft.name}</h4>
+                        <p><strong>Rarity Score:</strong> ${nft.rarityScore.toFixed(4)}</p>
+                        <p><strong>Attributes:</strong> ${JSON.stringify(nft.attributes)}</p>
+                    </div>
+                `;
+            });
+            
+            resultsDiv.innerHTML = html;
+        }
+    </script>
+</body>
+</html>
