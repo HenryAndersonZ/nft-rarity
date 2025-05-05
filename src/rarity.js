@@ -28,6 +28,9 @@ class RarityCalculator {
         
         Object.keys(nft.attributes).forEach(trait => {
             const value = nft.attributes[trait];
+            if (!this.traitFrequency[trait] || !this.traitFrequency[trait][value]) {
+                throw new Error(`Missing trait frequency data for ${trait}: ${value}`);
+            }
             const frequency = this.traitFrequency[trait][value];
             const probability = frequency / this.nfts.length;
             rarityScore *= probability;
@@ -41,6 +44,9 @@ class RarityCalculator {
         
         Object.keys(nft.attributes).forEach(trait => {
             const value = nft.attributes[trait];
+            if (!this.traitFrequency[trait] || !this.traitFrequency[trait][value]) {
+                throw new Error(`Missing trait frequency data for ${trait}: ${value}`);
+            }
             const frequency = this.traitFrequency[trait][value];
             const traitScore = 1 / (frequency / this.nfts.length);
             rarityScore += traitScore;
